@@ -1,40 +1,38 @@
 const button = document.getElementById("button-circle");
 
 const handleClick = () => {
-  if (!getAdviceApi) {
-    alert("sorry, no advice available");
+  // const buttonCircle = document.querySelector(".button-circle");
+  if (button) {
+    button.classList.remove("active");
   }
-  return getAdviceApi();
+  button.classList.add("active");
+
+  getAdviceApi();
 };
 
 const getAdviceApi = async () => {
   const url = "https://api.adviceslip.com/advice";
+
   try {
     const response = await fetch(url);
     if (response.status !== 200) {
       console.log("Server error: ", response);
     }
     const data = await response.json();
-    mainContainer(data);
+    displayAdvice(data);
   } catch (error) {
     console.log("error: ", error);
   }
 };
 
-const mainContainer = (data) => {
-  const message = `Sorry no ${adviceIdSection} and no ${adviceSectionText} found.`;
-
-  if (!adviceIdSection || !adviceSectionText) {
-    return message;
-  } else {
-    adviceIdSection(data);
-    adviceSectionText(data);
-    return;
-  }
+const displayAdvice = (data) => {
+  adviceSectionId(data);
+  adviceSectionText(data);
 };
 
-const adviceIdSection = (data) => {
+const adviceSectionId = (data) => {
   const adviceIdNumber = document.getElementById("advice-id-number");
+
   if (!adviceIdNumber) {
     adviceIdNumber.textContent = "";
   }
@@ -50,5 +48,5 @@ const adviceSectionText = (data) => {
   adviceText.textContent = `"${data.slip.advice}"`;
 };
 
-getAdviceApi();
+window.onload = getAdviceApi();
 button.addEventListener("click", handleClick);

@@ -99,12 +99,28 @@ body {
   position: absolute;
   bottom: -2rem;
   cursor: pointer;
-  transform: 0.3s;
+  transition: all 0.3s;
   opacity: 1;
 }
 
 .button-circle:hover {
   opacity: 0.6;
+  transform: translateY(-6px);
+}
+
+.active {
+  -webkit-box-shadow: 0 0 30px var(--primary-color-neon-green);
+  -moz-box-shadow: 0 0 30px var(--primary-color-neon-green);
+  box-shadow: 0 0 30px var(--primary-color-neon-green);
+  transition: all 0.4s;
+  transform: translateY(-0.01rem);
+}
+
+.active:hover {
+  opacity: 0.6;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .attribution-footer {
@@ -161,30 +177,16 @@ body {
 
   .pattern-divider-desktop {
     display: block;
-    margin-top: 0.6rem;
+    margin-top: 3rem;
   }
 
   .button-circle {
-    bottom: -2.05rem;
-  }
-
-  @keyframes glowing {
-    0% {
-      background-color: #2ba805;
-      box-shadow: 0 0 5px #2ba805;
-    }
-    50% {
-      background-color: #49e819;
-      box-shadow: 0 0 20px #49e819;
-    }
-    100% {
-      background-color: #2ba805;
-      box-shadow: 0 0 5px #2ba805;
-    }
+    bottom: -2rem;
   }
 
   .button-circle:hover {
-    animation: glowing 0.3s;
+    opacity: 0.6;
+    transform: translateY(-6px);
   }
 
   .attribution-footer {
