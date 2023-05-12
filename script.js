@@ -1,12 +1,10 @@
-const button = document.getElementById("button-circle");
+const button = document.querySelector(".button-circle");
 
 const handleClick = () => {
-  // const buttonCircle = document.querySelector(".button-circle");
-  if (button) {
+  if (!button) {
     button.classList.remove("active");
   }
   button.classList.add("active");
-
   getAdviceApi();
 };
 
@@ -16,12 +14,12 @@ const getAdviceApi = async () => {
   try {
     const response = await fetch(url);
     if (response.status !== 200) {
-      console.log("Server error: ", response);
+      throw new Error(response.status);
     }
     const data = await response.json();
     displayAdvice(data);
   } catch (error) {
-    console.log("error: ", error);
+    throw new Error(error.message);
   }
 };
 
@@ -31,7 +29,7 @@ const displayAdvice = (data) => {
 };
 
 const adviceSectionId = (data) => {
-  const adviceIdNumber = document.getElementById("advice-id-number");
+  const adviceIdNumber = document.querySelector(".advice-id-number");
 
   if (!adviceIdNumber) {
     adviceIdNumber.textContent = "";
@@ -40,7 +38,7 @@ const adviceSectionId = (data) => {
 };
 
 const adviceSectionText = (data) => {
-  const adviceText = document.getElementById("advice-text");
+  const adviceText = document.querySelector(".advice-text");
 
   if (!adviceText) {
     adviceText.textContent = "";
